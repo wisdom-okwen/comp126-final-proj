@@ -10,17 +10,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Skip to main content link for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
   <!-- Navigation -->
-  <nav class="navbar">
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-container">
-      <a href="index.html" class="nav-logo">
-        <span class="logo-icon">📚</span>
+      <a href="index.html" class="nav-logo" aria-label="BookShare Home">
+        <span class="logo-icon" aria-hidden="true">📚</span>
         BookShare
       </a>
-      <button class="nav-toggle" aria-label="Toggle navigation">
-        <span class="hamburger"></span>
+      <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+        <span class="hamburger" aria-hidden="true"></span>
       </button>
-      <ul class="nav-menu">
+      <ul class="nav-menu" id="nav-menu" role="menubar">
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="about.html" class="nav-link active">About</a></li>
         <li><a href="request.html" class="nav-link">Request</a></li>
@@ -31,12 +34,12 @@
   </nav>
 
   <!-- Main Content -->
-  <main class="main">
+  <main class="main" id="main-content">
     <!-- Page Header with Background -->
-    <section class="page-header page-header-large">
+    <section class="page-header page-header-large" aria-labelledby="page-title">
       <div class="page-header-overlay"></div>
       <div class="container">
-        <h1>About BookShare</h1>
+        <h1 id="page-title">About BookShare</h1>
         <p>Connecting readers, sharing stories, building community since 2024</p>
       </div>
     </section>
@@ -200,7 +203,7 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-section">

@@ -10,16 +10,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <nav class="navbar">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-container">
-      <a href="index.html" class="nav-logo">
-        <span class="logo-icon">📚</span>
+      <a href="index.html" class="nav-logo" aria-label="BookShare Home">
+        <span class="logo-icon" aria-hidden="true">📚</span>
         BookShare
       </a>
-      <button class="nav-toggle" aria-label="Toggle navigation">
-        <span class="hamburger"></span>
+      <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+        <span class="hamburger" aria-hidden="true"></span>
       </button>
-      <ul class="nav-menu">
+      <ul class="nav-menu" id="nav-menu" role="menubar">
         <li><a href="index.html" class="nav-link active">Home</a></li>
         <li><a href="about.html" class="nav-link">About</a></li>
         <li><a href="request.html" class="nav-link">Request</a></li>
@@ -29,11 +31,11 @@
     </div>
   </nav>
 
-  <main class="main">
-    <section class="hero">
+  <main class="main" id="main-content">
+    <section class="hero" aria-labelledby="hero-title">
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <h1 class="hero-title">Share Books, Spread Knowledge</h1>
+        <h1 class="hero-title" id="hero-title">Share Books, Spread Knowledge</h1>
         <p class="hero-subtitle">
           Welcome to BookShare — a community platform where book lovers connect. 
           List books you've read and make them freely available for others to request. 
@@ -46,11 +48,11 @@
       </div>
     </section>
 
-    <section class="about-preview">
+    <section class="about-preview" aria-labelledby="about-title">
       <div class="container">
         <div class="about-grid">
-          <div class="about-text">
-            <h2 class="section-title">What is BookShare?</h2>
+          <article class="about-text">
+            <h2 class="section-title" id="about-title">What is BookShare?</h2>
             <p>
               BookShare is a community-driven platform designed to connect book enthusiasts. 
               Our mission is simple: reduce book waste and increase access to literature by 
@@ -69,8 +71,8 @@
               <li>⭐ Leave reviews and recommendations</li>
             </ul>
             <a href="about.html" class="btn btn-primary">Read More About Us</a>
-          </div>
-          <div class="about-image">
+          </article>
+          <aside class="about-image" aria-hidden="true">
             <div class="image-card">
               <div class="book-stack">
                 <div class="book book-1"></div>
@@ -78,12 +80,13 @@
                 <div class="book book-3"></div>
               </div>
             </div>
-          </div>
+          </aside>
         </div>
       </div>
     </section>
 
-    <section class="stats-section">
+    <section class="stats-section" aria-labelledby="stats-heading">
+      <h2 class="visually-hidden" id="stats-heading">Our Impact in Numbers</h2>
       <div class="container">
         <div class="stats-grid">
           <div class="stat-card">
@@ -119,8 +122,7 @@
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-section">

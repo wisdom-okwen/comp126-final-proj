@@ -10,17 +10,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Skip to main content link for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
   <!-- Navigation -->
-  <nav class="navbar">
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-container">
-      <a href="index.html" class="nav-logo">
-        <span class="logo-icon">📚</span>
+      <a href="index.html" class="nav-logo" aria-label="BookShare Home">
+        <span class="logo-icon" aria-hidden="true">📚</span>
         BookShare
       </a>
-      <button class="nav-toggle" aria-label="Toggle navigation">
-        <span class="hamburger"></span>
+      <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+        <span class="hamburger" aria-hidden="true"></span>
       </button>
-      <ul class="nav-menu">
+      <ul class="nav-menu" id="nav-menu" role="menubar">
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="about.html" class="nav-link">About</a></li>
         <li><a href="request.html" class="nav-link active">Request</a></li>
@@ -31,17 +34,18 @@
   </nav>
 
   <!-- Main Content -->
-  <main class="main">
+  <main class="main" id="main-content">
     <!-- Page Header -->
-    <section class="page-header">
+    <section class="page-header" aria-labelledby="page-title">
       <div class="container">
-        <h1>Request a Book</h1>
+        <h1 id="page-title">Request a Book</h1>
         <p>Fill out the form below to request a book from our community library</p>
       </div>
     </section>
 
     <!-- Request Forms Section -->
-    <section class="form-section">
+    <section class="form-section" aria-labelledby="forms-heading">
+      <h2 class="visually-hidden" id="forms-heading">Book Request Forms</h2>
       <div class="container">
         <div class="form-grid">
           
@@ -219,7 +223,7 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-section">
