@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initNavigation();
   initForms();
   initSmoothScroll();
+  initBookSearch();
 });
 
 
@@ -363,3 +364,88 @@ window.resetRequestForm = resetRequestForm;
 window.resetAvailabilityForm = resetAvailabilityForm;
 window.resetContactForm = resetContactForm;
 window.resetReviewForm = resetReviewForm;
+
+// Book Search Functionality
+function initBookSearch() {
+  const searchInput = document.getElementById('bookSearch');
+  const booksGrid = document.getElementById('booksGrid');
+  const bookCount = document.getElementById('bookCount');
+  const noResults = document.getElementById('noResults');
+  
+  if (!searchInput || !booksGrid) {
+    return;
+  }
+  
+  const bookCards = booksGrid.querySelectorAll('.book-card');
+  const totalBooks = bookCards.length;
+  
+  searchInput.addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase().trim();
+    let visibleCount = 0;
+    
+    bookCards.forEach(function(card) {
+      const title = card.getAttribute('data-title').toLowerCase();
+      const author = card.querySelector('.book-author').textContent.toLowerCase();
+      
+      // Check if title or author matches search term
+      if (title.includes(searchTerm) || author.includes(searchTerm)) {
+        card.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+    
+    // Update count display
+    if (bookCount) {
+      if (searchTerm === '') {
+        bookCount.textContent = 'Showing all ' + totalBooks + ' books';
+      } else {
+        bookCount.textContent = 'Showing ' + visibleCount + ' of ' + totalBooks + ' books';
+      }
+    }
+    
+    // Show/hide no results message
+    if (noResults) {
+      if (visibleCount === 0 && searchTerm !== '') {
+        noResults.classList.remove('hidden');
+        booksGrid.style.display = 'none';
+      } else {
+        noResults.classList.add('hidden');
+        booksGrid.style.display = '';
+      }
+    }
+  });
+}
+
+// Clear Search
+function clearSearch() {
+  const searchInput = document.getElementById('bookSearch');
+  const booksGrid = document.getElementById('booksGrid');
+  const bookCards = document.querySelectorAll('.book-card');
+  const bookCount = document.getElementById('bookCount');
+  const noResults = document.getElementById('noResults');
+  
+  if (searchInput) {
+    searchInput.value = '';
+    searchInput.focus();
+  }
+  
+  bookCards.forEach(function(card) {
+    card.classList.remove('hidden');
+  });
+  
+  if (booksGrid) {
+    booksGrid.style.display = '';
+  }
+  
+  if (noResults) {
+    noResults.classList.add('hidden');
+  }
+  
+  if (bookCount) {
+    bookCount.textContent = 'Showing all ' + bookCards.length + ' books';
+  }
+}
+
+window.clearSearch = clearSearch;
