@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initNavigation();
   initForms();
   initSmoothScroll();
-  initBookSearch();
+  loadBooksFromOpenLibrary();
 });
 
 
@@ -67,7 +67,6 @@ function initForms() {
     contactForm.addEventListener('submit', handleContactForm);
   }
   
-  // Review Form
   const reviewForm = document.getElementById('reviewForm');
   if (reviewForm) {
     reviewForm.addEventListener('submit', handleReviewForm);
@@ -337,16 +336,16 @@ function initBookSearch() {
     return;
   }
   
-  const bookCards = booksGrid.querySelectorAll('.book-card');
-  const totalBooks = bookCards.length;
-  
   searchInput.addEventListener('input', function() {
     const searchTerm = this.value.toLowerCase().trim();
+    const bookCards = booksGrid.querySelectorAll('.book-card');
+    const totalBooks = bookCards.length;
     let visibleCount = 0;
     
     bookCards.forEach(function(card) {
       const title = card.getAttribute('data-title').toLowerCase();
-      const author = card.querySelector('.book-author').textContent.toLowerCase();
+      const authorEl = card.querySelector('.book-author');
+      const author = authorEl ? authorEl.textContent.toLowerCase() : '';
       
       if (title.includes(searchTerm) || author.includes(searchTerm)) {
         card.classList.remove('hidden');
@@ -375,6 +374,162 @@ function initBookSearch() {
     }
   });
 }
+
+async function loadBooksFromOpenLibrary() {
+  const booksGrid = document.getElementById('booksGrid');
+  const loadingContainer = document.getElementById('loadingContainer');
+  const bookCount = document.getElementById('bookCount');
+  
+  if (!booksGrid) {
+    return;
+  }
+  
+  const fallbackBooks = [
+    { title: 'To Kill a Mockingbird', author: 'Harper Lee', coverId: 8228691, year: 1960, genre: 'Fiction' },
+    { title: '1984', author: 'George Orwell', coverId: 7222246, year: 1949, genre: 'Dystopian' },
+    { title: 'Pride and Prejudice', author: 'Jane Austen', coverId: 8739161, year: 1813, genre: 'Romance' },
+    { title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', coverId: 7222161, year: 1925, genre: 'Fiction' },
+    { title: 'The Catcher in the Rye', author: 'J.D. Salinger', coverId: 8231432, year: 1951, genre: 'Coming-of-age' },
+    { title: 'Harry Potter and the Sorcerer\'s Stone', author: 'J.K. Rowling', coverId: 10521270, year: 1997, genre: 'Fantasy' },
+    { title: 'The Hobbit', author: 'J.R.R. Tolkien', coverId: 8406786, year: 1937, genre: 'Fantasy' },
+    { title: 'Brave New World', author: 'Aldous Huxley', coverId: 5765487, year: 1932, genre: 'Dystopian' },
+    { title: 'The Alchemist', author: 'Paulo Coelho', coverId: 8769426, year: 1988, genre: 'Adventure' },
+    { title: 'Jane Eyre', author: 'Charlotte Brontë', coverId: 8235308, year: 1847, genre: 'Gothic' },
+    { title: 'Moby Dick', author: 'Herman Melville', coverId: 8227922, year: 1851, genre: 'Adventure' },
+    { title: 'Little Women', author: 'Louisa May Alcott', coverId: 8260666, year: 1868, genre: 'Fiction' },
+    { title: 'The Lord of the Rings', author: 'J.R.R. Tolkien', coverId: 9255566, year: 1954, genre: 'Fantasy' },
+    { title: 'Animal Farm', author: 'George Orwell', coverId: 7222117, year: 1945, genre: 'Satire' },
+    { title: 'The Chronicles of Narnia', author: 'C.S. Lewis', coverId: 8231993, year: 1950, genre: 'Fantasy' },
+    { title: 'Fahrenheit 451', author: 'Ray Bradbury', coverId: 9274006, year: 1953, genre: 'Dystopian' },
+    { title: 'Wuthering Heights', author: 'Emily Brontë', coverId: 8231086, year: 1847, genre: 'Gothic' },
+    { title: 'The Odyssey', author: 'Homer', coverId: 8739968, year: -800, genre: 'Epic' },
+    { title: 'Crime and Punishment', author: 'Fyodor Dostoevsky', coverId: 8231986, year: 1866, genre: 'Psychological' },
+    { title: 'The Picture of Dorian Gray', author: 'Oscar Wilde', coverId: 8231146, year: 1890, genre: 'Gothic' },
+    { title: 'Frankenstein', author: 'Mary Shelley', coverId: 6788469, year: 1818, genre: 'Horror' },
+    { title: 'Dracula', author: 'Bram Stoker', coverId: 8228635, year: 1897, genre: 'Horror' },
+    { title: 'The Adventures of Sherlock Holmes', author: 'Arthur Conan Doyle', coverId: 8769272, year: 1892, genre: 'Mystery' },
+    { title: 'A Tale of Two Cities', author: 'Charles Dickens', coverId: 8231153, year: 1859, genre: 'Historical' },
+    { title: 'The Grapes of Wrath', author: 'John Steinbeck', coverId: 8228551, year: 1939, genre: 'Fiction' },
+    { title: 'One Hundred Years of Solitude', author: 'Gabriel García Márquez', coverId: 8235863, year: 1967, genre: 'Magical Realism' },
+    { title: 'The Kite Runner', author: 'Khaled Hosseini', coverId: 8235957, year: 2003, genre: 'Drama' },
+    { title: 'The Hunger Games', author: 'Suzanne Collins', coverId: 8769555, year: 2008, genre: 'Dystopian' }
+  ];
+  
+  const requestedBooks = ['Pride and Prejudice', 'Harry Potter and the Sorcerer\'s Stone', 'Jane Eyre', 'The Hunger Games', 'Frankenstein', 'The Lord of the Rings'];
+  
+  const timeout = (ms) => new Promise((_, reject) => 
+    setTimeout(() => reject(new Error('Timeout')), ms)
+  );
+  
+  try {
+    const fetchBooks = async () => {
+      const bookPromises = fallbackBooks.map(async (fallback) => {
+        try {
+          const response = await fetch(
+            `https://openlibrary.org/search.json?title=${encodeURIComponent(fallback.title)}&limit=1`
+          );
+          const data = await response.json();
+          
+          if (data.docs && data.docs.length > 0) {
+            const book = data.docs[0];
+            return {
+              title: book.title || fallback.title,
+              author: book.author_name ? book.author_name[0] : fallback.author,
+              coverId: book.cover_i || fallback.coverId,
+              firstPublishYear: book.first_publish_year || fallback.year,
+              genre: fallback.genre,
+              isRequested: requestedBooks.includes(fallback.title)
+            };
+          }
+          return { ...fallback, firstPublishYear: fallback.year, isRequested: requestedBooks.includes(fallback.title) };
+        } catch (error) {
+          return { ...fallback, firstPublishYear: fallback.year, isRequested: requestedBooks.includes(fallback.title) };
+        }
+      });
+      
+      return await Promise.all(bookPromises);
+    };
+    
+    let books;
+    try {
+      books = await Promise.race([fetchBooks(), timeout(5000)]);
+    } catch (e) {
+      console.log('API timeout, using fallback data');
+      books = fallbackBooks.map(book => ({
+        ...book,
+        firstPublishYear: book.year,
+        isRequested: requestedBooks.includes(book.title)
+      }));
+    }
+    
+    if (loadingContainer) {
+      loadingContainer.classList.add('hidden');
+    }
+    
+    booksGrid.innerHTML = books.map(book => createBookCard(book)).join('');
+    
+    if (bookCount) {
+      bookCount.textContent = `Showing all ${books.length} books`;
+    }
+    
+    initBookSearch();
+    
+  } catch (error) {
+    console.error('Error loading books:', error);
+    
+    const books = fallbackBooks.map(book => ({
+      ...book,
+      firstPublishYear: book.year,
+      isRequested: requestedBooks.includes(book.title)
+    }));
+    
+    if (loadingContainer) {
+      loadingContainer.classList.add('hidden');
+    }
+    
+    booksGrid.innerHTML = books.map(book => createBookCard(book)).join('');
+    
+    if (bookCount) {
+      bookCount.textContent = `Showing all ${books.length} books`;
+    }
+    
+    initBookSearch();
+  }
+}
+
+function createBookCard(book) {
+  const coverUrl = book.coverId 
+    ? `https://covers.openlibrary.org/b/id/${book.coverId}-M.jpg`
+    : null;
+  
+  const statusClass = book.isRequested ? 'requested' : 'available';
+  const statusText = book.isRequested ? 'Requested' : 'Available';
+  const buttonClass = book.isRequested ? 'btn-secondary' : 'btn-primary';
+  const buttonText = book.isRequested ? 'Join Waitlist' : 'Request Book';
+  
+  return `
+    <article class="book-card" data-title="${book.title}" role="listitem">
+      <div class="book-cover">
+        ${coverUrl 
+          ? `<img src="${coverUrl}" alt="Cover of ${book.title}" class="book-cover-img" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'book-cover-placeholder\\'>📚</div>'">`
+          : `<div class="book-cover-placeholder">📚</div>`
+        }
+      </div>
+      <div class="book-info">
+        <h3 class="book-title">${book.title}</h3>
+        <p class="book-author">by ${book.author}</p>
+        <div class="book-meta">
+          <span class="book-genre">${book.genre}</span>
+          <span class="book-status ${statusClass}">${statusText}</span>
+        </div>
+        ${book.firstPublishYear ? `<p class="book-year">First published: ${book.firstPublishYear}</p>` : ''}
+        <a href="request.html" class="btn ${buttonClass} btn-small">${buttonText}</a>
+      </div>
+    </article>
+  `;
+}
+
+window.loadBooksFromOpenLibrary = loadBooksFromOpenLibrary;
 
 function clearSearch() {
   const searchInput = document.getElementById('bookSearch');
