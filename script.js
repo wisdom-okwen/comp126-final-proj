@@ -15,17 +15,14 @@ function initNavigation() {
   const navMenu = document.querySelector('.nav-menu');
   
   if (navToggle && navMenu) {
-    // Toggle mobile menu on button click
     navToggle.addEventListener('click', function() {
       navToggle.classList.toggle('active');
       navMenu.classList.toggle('active');
       
-      // Update ARIA attribute for accessibility
       const isExpanded = navMenu.classList.contains('active');
       navToggle.setAttribute('aria-expanded', isExpanded);
     });
     
-    // Close menu when clicking on a link
     const navLinks = navMenu.querySelectorAll('.nav-link');
     navLinks.forEach(function(link) {
       link.addEventListener('click', function() {
@@ -35,7 +32,6 @@ function initNavigation() {
       });
     });
     
-    // Close menu when clicking outside
     document.addEventListener('click', function(event) {
       if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
         navToggle.classList.remove('active');
@@ -44,7 +40,6 @@ function initNavigation() {
       }
     });
     
-    // Close menu on escape key
     document.addEventListener('keydown', function(event) {
       if (event.key === 'Escape' && navMenu.classList.contains('active')) {
         navToggle.classList.remove('active');
@@ -57,19 +52,16 @@ function initNavigation() {
 }
 
 function initForms() {
-  // Book Request Form
   const bookRequestForm = document.getElementById('bookRequestForm');
   if (bookRequestForm) {
     bookRequestForm.addEventListener('submit', handleBookRequest);
   }
   
-  // Availability Form
   const availabilityForm = document.getElementById('availabilityForm');
   if (availabilityForm) {
     availabilityForm.addEventListener('submit', handleAvailabilityCheck);
   }
   
-  // Contact Form
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', handleContactForm);
@@ -88,18 +80,10 @@ function handleBookRequest(event) {
   const form = event.target;
   const formData = new FormData(form);
   
-  // Validate form
   if (!validateForm(form)) {
     return;
   }
   
-  // Log form data (in production, this would be sent to a server)
-  console.log('Book Request Submitted:');
-  for (let [key, value] of formData.entries()) {
-    console.log(`  ${key}: ${value}`);
-  }
-  
-  // Show success message
   const successMessage = document.getElementById('requestSuccess');
   if (successMessage) {
     form.style.display = 'none';
@@ -108,7 +92,6 @@ function handleBookRequest(event) {
   }
 }
 
-// Reset Book Request Form
 function resetRequestForm() {
   const form = document.getElementById('bookRequestForm');
   const successMessage = document.getElementById('requestSuccess');
@@ -127,18 +110,15 @@ function handleAvailabilityCheck(event) {
   const form = event.target;
   const formData = new FormData(form);
   
-  // Validate form
   if (!validateForm(form)) {
     return;
   }
   
-  // Log form data
   console.log('Availability Check:');
   for (let [key, value] of formData.entries()) {
     console.log(`  ${key}: ${value}`);
   }
   
-  // Show availability results
   const resultsSection = document.getElementById('availabilityResults');
   if (resultsSection) {
     form.style.display = 'none';
@@ -147,7 +127,6 @@ function handleAvailabilityCheck(event) {
   }
 }
 
-// Reset Availability Form
 function resetAvailabilityForm() {
   const form = document.getElementById('availabilityForm');
   const resultsSection = document.getElementById('availabilityResults');
@@ -166,18 +145,15 @@ function handleContactForm(event) {
   const form = event.target;
   const formData = new FormData(form);
   
-  // Validate form
   if (!validateForm(form)) {
     return;
   }
   
-  // Log form data
   console.log('Contact Form Submitted:');
   for (let [key, value] of formData.entries()) {
     console.log(`  ${key}: ${value}`);
   }
   
-  // Show success message
   const successMessage = document.getElementById('contactSuccess');
   if (successMessage) {
     form.style.display = 'none';
@@ -186,7 +162,6 @@ function handleContactForm(event) {
   }
 }
 
-// Reset Contact Form
 function resetContactForm() {
   const form = document.getElementById('contactForm');
   const successMessage = document.getElementById('contactSuccess');
@@ -206,18 +181,15 @@ function handleReviewForm(event) {
   const form = event.target;
   const formData = new FormData(form);
   
-  // Validate form
   if (!validateForm(form)) {
     return;
   }
   
-  // Log form data
   console.log('Review Submitted:');
   for (let [key, value] of formData.entries()) {
     console.log(`  ${key}: ${value}`);
   }
   
-  // Show success message
   const successMessage = document.getElementById('reviewSuccess');
   if (successMessage) {
     form.style.display = 'none';
@@ -226,7 +198,6 @@ function handleReviewForm(event) {
   }
 }
 
-// Reset Review Form
 function resetReviewForm() {
   const form = document.getElementById('reviewForm');
   const successMessage = document.getElementById('reviewSuccess');
@@ -245,17 +216,14 @@ function validateForm(form) {
   let isValid = true;
   
   requiredFields.forEach(function(field) {
-    // Remove previous error styling
     field.classList.remove('error');
     
-    // Check if field is empty
     if (!field.value.trim()) {
       isValid = false;
       field.classList.add('error');
       showFieldError(field, 'This field is required');
     }
     
-    // Validate email format
     if (field.type === 'email' && field.value.trim()) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(field.value)) {
@@ -265,7 +233,6 @@ function validateForm(form) {
       }
     }
     
-    // Validate phone format (basic validation)
     if (field.type === 'tel' && field.value.trim()) {
       const phoneRegex = /^[\d\s\-\(\)\+]{10,}$/;
       if (!phoneRegex.test(field.value)) {
@@ -276,7 +243,6 @@ function validateForm(form) {
     }
   });
   
-  // Focus first error field
   if (!isValid) {
     const firstError = form.querySelector('.error');
     if (firstError) {
@@ -287,22 +253,18 @@ function validateForm(form) {
   return isValid;
 }
 
-// Show field error message
 function showFieldError(field, message) {
-  // Remove existing error message
   const existingError = field.parentNode.querySelector('.error-message');
   if (existingError) {
     existingError.remove();
   }
   
-  // Create and append error message
   const errorElement = document.createElement('span');
   errorElement.className = 'error-message';
   errorElement.textContent = message;
   errorElement.style.cssText = 'color: #c62828; font-size: 0.875rem; margin-top: 0.25rem; display: block;';
   field.parentNode.appendChild(errorElement);
   
-  // Remove error on input
   field.addEventListener('input', function() {
     field.classList.remove('error');
     const error = field.parentNode.querySelector('.error-message');
@@ -365,7 +327,6 @@ window.resetAvailabilityForm = resetAvailabilityForm;
 window.resetContactForm = resetContactForm;
 window.resetReviewForm = resetReviewForm;
 
-// Book Search Functionality
 function initBookSearch() {
   const searchInput = document.getElementById('bookSearch');
   const booksGrid = document.getElementById('booksGrid');
@@ -387,7 +348,6 @@ function initBookSearch() {
       const title = card.getAttribute('data-title').toLowerCase();
       const author = card.querySelector('.book-author').textContent.toLowerCase();
       
-      // Check if title or author matches search term
       if (title.includes(searchTerm) || author.includes(searchTerm)) {
         card.classList.remove('hidden');
         visibleCount++;
@@ -396,7 +356,6 @@ function initBookSearch() {
       }
     });
     
-    // Update count display
     if (bookCount) {
       if (searchTerm === '') {
         bookCount.textContent = 'Showing all ' + totalBooks + ' books';
@@ -405,7 +364,6 @@ function initBookSearch() {
       }
     }
     
-    // Show/hide no results message
     if (noResults) {
       if (visibleCount === 0 && searchTerm !== '') {
         noResults.classList.remove('hidden');
@@ -418,7 +376,6 @@ function initBookSearch() {
   });
 }
 
-// Clear Search
 function clearSearch() {
   const searchInput = document.getElementById('bookSearch');
   const booksGrid = document.getElementById('booksGrid');
