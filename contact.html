@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - BookShare</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">📚</span>
+        BookShare
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span class="hamburger"></span>
+      </button>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="request.html" class="nav-link">Request</a></li>
+        <li><a href="contact.html" class="nav-link active">Contact</a></li>
+        <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="main">
+    <section class="page-header">
+      <div class="container">
+        <h1>Contact Us</h1>
+        <p>Have questions? We'd love to hear from you. Send us a message!</p>
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <div class="container">
+        <div class="contact-grid">
+          
+          <!-- Contact Form -->
+          <div class="form-card">
+            <div class="form-card-header">
+              <h2>💬 Send Us a Message</h2>
+              <p>Fill out the form and we'll get back to you as soon as possible</p>
+            </div>
+            <form id="contactForm" class="form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contactName">Full Name *</label>
+                  <input type="text" id="contactName" name="name" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                  <label for="contactEmail">Email Address *</label>
+                  <input type="email" id="contactEmail" name="email" required placeholder="your.email@example.com">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contactPhone">Phone Number *</label>
+                <input type="tel" id="contactPhone" name="phone" required placeholder="(123) 456-7890">
+              </div>
+
+              <div class="form-group">
+                <label for="contactSubject">Subject</label>
+                <select id="contactSubject" name="subject">
+                  <option value="">Select a subject...</option>
+                  <option value="general">General Inquiry</option>
+                  <option value="book-request">Book Request Help</option>
+                  <option value="donation">Book Donation</option>
+                  <option value="feedback">Feedback/Suggestion</option>
+                  <option value="issue">Report an Issue</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="contactMessage">Message *</label>
+                <textarea id="contactMessage" name="message" rows="6" required placeholder="Type your message here..."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">
+                <span class="btn-text">Send Message</span>
+                <span class="btn-icon">✉️</span>
+              </button>
+            </form>
+
+            <!-- Success Message (Hidden by default) -->
+            <div id="contactSuccess" class="success-message hidden">
+              <div class="success-icon">✅</div>
+              <h3>Message Sent Successfully!</h3>
+              <p>Thank you for reaching out. We'll respond within 24-48 hours.</p>
+              <button class="btn btn-secondary" onclick="resetContactForm()">Send Another Message</button>
+            </div>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="contact-info">
+            <div class="info-card">
+              <div class="info-icon">📍</div>
+              <h3>Our Location</h3>
+              <p>UNC Chapel Hill Campus</p>
+              <p>Chapel Hill, NC 27599</p>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">📧</div>
+              <h3>Email Us</h3>
+              <p>bookshare@example.com</p>
+              <p>support@bookshare.com</p>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">📞</div>
+              <h3>Call Us</h3>
+              <p>(919) 555-BOOK</p>
+              <p>Mon-Fri: 9am - 5pm</p>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">🕐</div>
+              <h3>Response Time</h3>
+              <p>We typically respond within</p>
+              <p><strong>24-48 hours</strong></p>
+            </div>
+
+            <div class="social-links">
+              <h3>Follow Us</h3>
+              <div class="social-icons">
+                <a href="#" class="social-icon" aria-label="Facebook">📘</a>
+                <a href="#" class="social-icon" aria-label="Twitter">🐦</a>
+                <a href="#" class="social-icon" aria-label="Instagram">📷</a>
+                <a href="#" class="social-icon" aria-label="LinkedIn">💼</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <div class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>How do I request a book?</h3>
+            <p>Simply visit our Request page, fill out the form with your details and the book you want, and submit. We'll check availability and get back to you!</p>
+          </div>
+          <div class="faq-item">
+            <h3>Is there a cost to borrow books?</h3>
+            <p>No! BookShare is completely free. We're a community-driven platform focused on sharing knowledge.</p>
+          </div>
+          <div class="faq-item">
+            <h3>How long can I keep a book?</h3>
+            <p>Generally, we ask that you return or pass on books within 30 days so others can enjoy them too.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Can I donate books?</h3>
+            <p>Absolutely! We welcome book donations. Contact us with details about the books you'd like to share.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>📚 BookShare</h3>
+          <p>Connecting readers, sharing stories, building community.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="request.html">Request</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact Info</h4>
+          <p>📧 bookshare@example.com</p>
+          <p>📍 UNC Chapel Hill</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 BookShare - COMP 126 Final Project | Wisdom Okwen</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

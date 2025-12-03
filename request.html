@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request a Book - BookShare</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">📚</span>
+        BookShare
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span class="hamburger"></span>
+      </button>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="request.html" class="nav-link active">Request</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <h1>Request a Book</h1>
+        <p>Fill out the form below to request a book from our community library</p>
+      </div>
+    </section>
+
+    <!-- Request Forms Section -->
+    <section class="form-section">
+      <div class="container">
+        <div class="form-grid">
+          
+          <!-- Book Request Form -->
+          <div class="form-card">
+            <div class="form-card-header">
+              <h2>📖 Request a Specific Book</h2>
+              <p>Know exactly what you want? Request it here!</p>
+            </div>
+            <form id="bookRequestForm" class="form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="reqName">Full Name *</label>
+                  <input type="text" id="reqName" name="name" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                  <label for="reqEmail">Email Address *</label>
+                  <input type="email" id="reqEmail" name="email" required placeholder="your.email@example.com">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="reqPhone">Phone Number *</label>
+                  <input type="tel" id="reqPhone" name="phone" required placeholder="(123) 456-7890">
+                </div>
+                <div class="form-group">
+                  <label for="reqAddress">Shipping Address *</label>
+                  <input type="text" id="reqAddress" name="address" required placeholder="Street, City, State, ZIP">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="reqBookTitle">Book Title *</label>
+                  <input type="text" id="reqBookTitle" name="bookTitle" required placeholder="Enter book title">
+                </div>
+                <div class="form-group">
+                  <label for="reqAuthor">Author *</label>
+                  <input type="text" id="reqAuthor" name="author" required placeholder="Enter author name">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="reqNotes">Additional Notes</label>
+                <textarea id="reqNotes" name="notes" rows="3" placeholder="Any specific edition, condition preferences, etc."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">
+                <span class="btn-text">Submit Request</span>
+                <span class="btn-icon">📨</span>
+              </button>
+            </form>
+
+            <!-- Success Message (Hidden by default) -->
+            <div id="requestSuccess" class="success-message hidden">
+              <div class="success-icon">✅</div>
+              <h3>Book Request Successfully Submitted!</h3>
+              <p>We'll review your request and get back to you within 24-48 hours.</p>
+              <button class="btn btn-secondary" onclick="resetRequestForm()">Submit Another Request</button>
+            </div>
+          </div>
+
+          <!-- Check Availability Form -->
+          <div class="form-card">
+            <div class="form-card-header">
+              <h2>🔍 Check Book Availability</h2>
+              <p>Not sure what's available? Browse by category!</p>
+            </div>
+            <form id="availabilityForm" class="form">
+              <div class="form-group">
+                <label for="bookType">Type of Book *</label>
+                <select id="bookType" name="bookType" required>
+                  <option value="">Select book type...</option>
+                  <option value="fiction">Fiction</option>
+                  <option value="non-fiction">Non-Fiction</option>
+                  <option value="textbook">Textbook</option>
+                  <option value="comic">Comic/Graphic Novel</option>
+                  <option value="magazine">Magazine</option>
+                  <option value="children">Children's Book</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="bookGenre">Genre *</label>
+                <select id="bookGenre" name="genre" required>
+                  <option value="">Select genre...</option>
+                  <option value="mystery">Mystery/Thriller</option>
+                  <option value="romance">Romance</option>
+                  <option value="sci-fi">Science Fiction</option>
+                  <option value="fantasy">Fantasy</option>
+                  <option value="horror">Horror</option>
+                  <option value="biography">Biography/Memoir</option>
+                  <option value="self-help">Self-Help</option>
+                  <option value="history">History</option>
+                  <option value="science">Science</option>
+                  <option value="business">Business</option>
+                  <option value="cooking">Cooking/Food</option>
+                  <option value="art">Art/Photography</option>
+                  <option value="travel">Travel</option>
+                  <option value="religion">Religion/Spirituality</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="bookAge">Book Age Preference</label>
+                <select id="bookAge" name="age">
+                  <option value="">Any age...</option>
+                  <option value="new">New (Published within 1 year)</option>
+                  <option value="recent">Recent (1-5 years old)</option>
+                  <option value="classic">Classic (5-20 years old)</option>
+                  <option value="vintage">Vintage (20+ years old)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="bookCondition">Condition Preference</label>
+                <select id="bookCondition" name="condition">
+                  <option value="">Any condition...</option>
+                  <option value="like-new">Like New</option>
+                  <option value="good">Good</option>
+                  <option value="fair">Fair</option>
+                  <option value="worn">Worn (Reading copy)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="availEmail">Your Email (for notifications)</label>
+                <input type="email" id="availEmail" name="email" placeholder="your.email@example.com">
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">
+                <span class="btn-text">Check Availability</span>
+                <span class="btn-icon">🔎</span>
+              </button>
+            </form>
+
+            <!-- Availability Results (Hidden by default) -->
+            <div id="availabilityResults" class="availability-results hidden">
+              <h3>📚 Available Books</h3>
+              <div class="results-grid">
+                <div class="result-card">
+                  <div class="result-cover">📕</div>
+                  <div class="result-info">
+                    <h4>The Great Gatsby</h4>
+                    <p>F. Scott Fitzgerald</p>
+                    <span class="tag tag-available">Available</span>
+                  </div>
+                </div>
+                <div class="result-card">
+                  <div class="result-cover">📗</div>
+                  <div class="result-info">
+                    <h4>1984</h4>
+                    <p>George Orwell</p>
+                    <span class="tag tag-available">Available</span>
+                  </div>
+                </div>
+                <div class="result-card">
+                  <div class="result-cover">📘</div>
+                  <div class="result-info">
+                    <h4>To Kill a Mockingbird</h4>
+                    <p>Harper Lee</p>
+                    <span class="tag tag-requested">Requested</span>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-secondary" onclick="resetAvailabilityForm()">Search Again</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>📚 BookShare</h3>
+          <p>Connecting readers, sharing stories, building community.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="request.html">Request</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact Info</h4>
+          <p>📧 bookshare@example.com</p>
+          <p>📍 UNC Chapel Hill</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 BookShare - COMP 126 Final Project | Wisdom Okwen</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
