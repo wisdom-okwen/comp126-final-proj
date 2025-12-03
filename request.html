@@ -114,9 +114,14 @@
           <div class="form-card">
             <div class="form-card-header">
               <h2>🔍 Check Book Availability</h2>
-              <p>Not sure what's available? Browse by category!</p>
+              <p>Search for a specific book or browse by category!</p>
             </div>
             <form id="availabilityForm" class="form">
+              <div class="form-group">
+                <label for="searchTitle">Book Title</label>
+                <input type="text" id="searchTitle" name="searchTitle" placeholder="Enter book title to search...">
+              </div>
+
               <div class="form-group">
                 <label for="bookType">Type of Book *</label>
                 <select id="bookType" name="bookType" required>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Books - BookShare</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" aria-label="BookShare Home">
+        <span class="logo-icon" aria-hidden="true">📚</span>
+        BookShare
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+        <span class="hamburger" aria-hidden="true"></span>
+      </button>
+      <ul class="nav-menu" id="nav-menu" role="menubar">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="books.html" class="nav-link active">Books</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="request.html" class="nav-link">Request</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="main" id="main-content">
+    <header class="page-header">
+      <h1>📖 Browse Books</h1>
+      <p>Explore our community library and find your next read</p>
+    </header>
+
+    <section class="books-section" aria-labelledby="books-heading">
+      <div class="container">
+        <h2 class="visually-hidden" id="books-heading">Available Books</h2>
+        
+        <!-- Search and Filter Bar -->
+        <div class="search-container">
+          <div class="search-bar">
+            <label for="bookSearch" class="visually-hidden">Search books by title</label>
+            <input 
+              type="text" 
+              id="bookSearch" 
+              class="search-input" 
+              placeholder="Search books by title..."
+              aria-describedby="search-help"
+            >
+            <span class="search-icon" aria-hidden="true">🔍</span>
+          </div>
+          <p id="search-help" class="search-help">Type to filter books by title</p>
+          <div class="search-stats">
+            <span id="bookCount">Showing all 12 books</span>
+          </div>
+        </div>
+
+        <!-- Books Grid -->
+        <div class="books-grid" id="booksGrid" role="list">
+          
+          <!-- Book 1 -->
+          <article class="book-card" data-title="To Kill a Mockingbird" role="listitem">
+            <div class="book-cover">
+              <span class="book-emoji" aria-hidden="true">📕</span>
+            </div>
+            <div class="book-info">
+              <h3 class="book-title">To Kill a Mockingbird</h3>
+              <p class="book-author">by Harper Lee</p>
+              <div class="book-meta">
+                <span class="book-genre">Fiction</span>
+                <span class="book-status available">Available</span>
+              </div>
+              <p class="book-description">A classic novel about racial injustice in the Deep South.</p>
+              <a href="request.html" class="btn btn-primary btn-small">Request Book</a>
+            </div>
+          </article>
+
+          <!-- Book 2 -->
+          <article class="book-card" data-title="1984" role="listitem">
+            <div class="book-cover">
+              <span class="book-emoji" aria-hidden="true">📗</span>
+            </div>
+            <div class="book-info">
+              <h3 class="book-title">1984</h3>
+              <p class="book-author">by George Orwell</p>
+              <div class="book-meta">
+                <span class="book-genre">Dystopian</span>
+                <span class="book-status available">Available</span>
+              </div>
+              <p class="book-description">A dystopian social science fiction novel and cautionary tale.</p>
+              <a href="request.html" class="btn btn-primary btn-small">Request Book</a>
+            </div>
+          </article>
+
+          <!-- Book 3 -->
+          <article class="book-card" data-title="Pride and Prejudice" role="listitem">
+            <div class="book-cover">
+              <span class="book-emoji" aria-hidden="true">📘</span>
+            </div>
+            <div class="book-info">
+              <h3 class="book-title">Pride and Prejudice</h3>
+              <p class="book-author">by Jane Austen</p>
+              <div class="book-meta">
+                <span class="book-genre">Romance</span>
+                <span class="book-status requested">Requested</span>
+              </div>
+              <p class="book-description">A romantic novel of manners following Elizabeth Bennet.</p>
+              <a href="request.html" class="btn btn-secondary btn-small">Join Waitlist</a>
+            </div>
+          </article>
+
+          <!-- Book 4 -->
+          <article class="book-card" data-title="The Great Gatsby" role="listitem">
+            <div class="book-cover">
+              <span class="book-emoji" aria-hidden="true">📙</span>
+            </div>
+            <div class="book-info">
+              <h3 class="book-title">The Great Gatsby</h3>
+              <p class="book-author">by F. Scott Fitzgerald</p>
+              <div class="book-meta">
+                <span class="book-genre">Fiction</span>
+                <span class="book-status available">Available</span>
+              </div>
+              <p class="book-description">A story of decadence and excess in the Jazz Age.</p>
+              <a href="request.html" class="btn btn-primary btn-small">Request Book</a>
+            </div>
+          </article>
+
+          <!-- Book 5 -->
+          <article class="book-card" data-title="The Catcher in the Rye" role="listitem">
+            <div class="book-cover">
+              <span class="book-emoji" aria-hidden="true">📕</span>
+            </div>
+            <div class="book-info">
+              <h3 class="book-title">The Catcher in the Rye</h3>
+              <p class="book-author">by J.D. Salinger</p>
+              <div class="book-meta">
+                <span class="book-genre">Coming-of-age</span>
+                <span class="book-status available">Available</span>
+              </div>
+              <p class="book-description">A story about teenage angst and alienation.</p>
+              <a href="request.html" class="btn btn-primary btn-small">Request Book</a>
+            </div>
+          </article>
+
+          <!-- Book 6 -->
+          <article class="book-card" data-title="Harry Potter and the Sorcerer's Stone" role="listitem">
+            <div class="book-cover">
+              <span class="book-emoji" aria-hidden="true">📗</span>
+            </div>
+            <div class="book-info">
+              <h3 class="book-title">Harry Potter and the Sorcerer's Stone</h3>
+              <p class="book-author">by J.K. Rowling</p>
+              <div class="book-meta">
+                <span class="book-genre">Fantasy</span>
+                <span class="book-status requested">Requested</span>
+              </div>
+              <p class="book-description">The magical adventure that started it all.</p>
+              <a href="request.html" class="btn btn-secondary btn-small">Join Waitlist</a>
+            </div>
+          </article>
+
+          <!-- Book 7 -->
+          <article class="book-card" data-title="The Hobbit" role="listitem">
+            <div class="book-cover">
+              <span class="book-emoji" aria-hidden="true">📘</span>
+            </div>
+            <div class="book-info">
+              <h3 class="book-title">The Hobbit</h3>
+              <p class="book-author">by J.R.R. Tolkien</p>
+              <div class="book-meta">
+                <span class="book-genre">Fantasy</span>
+                <span class="book-status available">Available</span>
+              </div>
+              <p class="book-description">An unexpected journey with Bilbo Baggins.</p>
+              <a href="request.html" class="btn btn-primary btn-small">Request Book</a>
+            </div>
+          </article>
+
+          <!-- Book 8 -->
+          <article class="book-card" data-title="Brave New World" role="listitem">
+            <div class="book-cover">
+              <span class="book-emoji" aria-hidden="true">📙</span>
+            </div>
+            <div class="book-info">
+              <h3 class="book-title">Brave New World</h3>
+              <p class="book-author">by Aldous Huxley</p>
+              <div class="book-meta">
+                <span class="book-genre">Dystopian</span>
+                <span class="book-status available">Available</span>
+              </div>
+              <p class="book-description">A futuristic world where humans are genetically modified.</p>
+              <a href="request.html" class="btn btn-primary btn-small">Request Book</a>
+            </div>
+          </article>
+
+          <!-- Book 9 -->
+          <article class="book-card" data-title="The Alchemist" role="listitem">
+            <div class="book-cover">
+              <span class="book-emoji" aria-hidden="true">📕</span>
+            </div>
+            <div class="book-info">
+              <h3 class="book-title">The Alchemist</h3>
+              <p class="book-author">by Paulo Coelho</p>
+              <div class="book-meta">
+                <span class="book-genre">Adventure</span>
+                <span class="book-status available">Available</span>
+              </div>
+              <p class="book-description">A journey of self-discovery following your dreams.</p>
+              <a href="request.html" class="btn btn-primary btn-small">Request Book</a>
+            </div>
+          </article>
+
+          <!-- Book 10 -->
+          <article class="book-card" data-title="Jane Eyre" role="listitem">
+            <div class="book-cover">
+              <span class="book-emoji" aria-hidden="true">📗</span>
+            </div>
+            <div class="book-info">
+              <h3 class="book-title">Jane Eyre</h3>
+              <p class="book-author">by Charlotte Brontë</p>
+              <div class="book-meta">
+                <span class="book-genre">Gothic</span>
+                <span class="book-status requested">Requested</span>
+              </div>
+              <p class="book-description">A classic tale of passion and independence.</p>
+              <a href="request.html" class="btn btn-secondary btn-small">Join Waitlist</a>
+            </div>
+          </article>
+
+          <!-- Book 11 -->
+          <article class="book-card" data-title="Moby Dick" role="listitem">
+            <div class="book-cover">
+              <span class="book-emoji" aria-hidden="true">📘</span>
+            </div>
+            <div class="book-info">
+              <h3 class="book-title">Moby Dick</h3>
+              <p class="book-author">by Herman Melville</p>
+              <div class="book-meta">
+                <span class="book-genre">Adventure</span>
+                <span class="book-status available">Available</span>
+              </div>
+              <p class="book-description">The epic tale of Captain Ahab and the white whale.</p>
+              <a href="request.html" class="btn btn-primary btn-small">Request Book</a>
+            </div>
+          </article>
+
+          <!-- Book 12 -->
+          <article class="book-card" data-title="Little Women" role="listitem">
+            <div class="book-cover">
+              <span class="book-emoji" aria-hidden="true">📙</span>
+            </div>
+            <div class="book-info">
+              <h3 class="book-title">Little Women</h3>
+              <p class="book-author">by Louisa May Alcott</p>
+              <div class="book-meta">
+                <span class="book-genre">Fiction</span>
+                <span class="book-status available">Available</span>
+              </div>
+              <p class="book-description">The lives and loves of the four March sisters.</p>
+              <a href="request.html" class="btn btn-primary btn-small">Request Book</a>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- No Results Message -->
+        <div class="no-results hidden" id="noResults">
+          <div class="no-results-content">
+            <span class="no-results-icon" aria-hidden="true">🔍</span>
+            <h3>No books found</h3>
+            <p>Try a different search term or browse all books</p>
+            <button class="btn btn-primary" onclick="clearSearch()">Clear Search</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>Can't find what you're looking for?</h2>
+        <p>Request a specific book and we'll try to find it for you!</p>
+        <div class="cta-buttons">
+          <a href="request.html" class="btn btn-primary">Request a Book</a>
+          <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>📚 BookShare</h3>
+          <p>Connecting readers, sharing stories, building community.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="books.html">Books</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="request.html">Request</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact Info</h4>
+          <p>📧 bookshare@example.com</p>
+          <p>📍 UNC Chapel Hill</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 BookShare - COMP 126 Final Project | Wisdom Okwen</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
